@@ -13,7 +13,7 @@ $target_file = "files/" . $encoded_file_name . "." .$file_name[1];
 move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
 $db = new DB();
-$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name."', '".$_FILES["file"]["size"]."')");
+$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$_FILES["file"]["size"]."')");
 
 ?>
 </pre>
