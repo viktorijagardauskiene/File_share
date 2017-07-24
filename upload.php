@@ -2,6 +2,7 @@
 <?php
 
 include 'classes/db.php';
+define("SITEURL", "//localhost/viktorijag/file_share/");
 
 print_r($_FILES);
 
@@ -39,8 +40,12 @@ $db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size)
 	</div>
 	<div class="container">
 		<div class="row">
-			
-
+			<div class="col-md-12">
+				<h2>Tavo dokumentas buvo įkeltas</h2>
+				<P>Dokumento pavadinimas: <?= $_FILES['file']['name']; ?> </P>
+				<P>Dokumento dydis: <?= $_FILES['file']['size']; ?> </P>
+				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>"> Download </a> </P>
+			</div>
 		</div>
 	</div>
 </body>
