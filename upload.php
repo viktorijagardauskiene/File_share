@@ -13,8 +13,10 @@ $target_file = "files/" . $encoded_file_name . "." .$file_name[1];
 
 move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
+$crypt = md5($file_name[0] . rand(1,100000));
+
 $db = new DB();
-$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$_FILES["file"]["size"]."')");
+$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$_FILES["file"]["size"]."', '".$crypt."')");
 
 ?>
 </pre>
@@ -35,7 +37,7 @@ $db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size)
 	<div class="jumbotron jumbotron-fluid">
 	  <div class="container">
 	    <h1 class="display-3">Dokumentų pasikeitimo serveris</h1>
-	    <p class="lead">Spausk nuorodą ir parsisiųsk</p>
+	    <p class="lead">Štai nuoroda</p>
 	  </div>
 	</div>
 	<div class="container">
@@ -44,7 +46,7 @@ $db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size)
 				<h2>Tavo dokumentas buvo įkeltas</h2>
 				<P>Dokumento pavadinimas: <?= $_FILES['file']['name']; ?> </P>
 				<P>Dokumento dydis: <?= $_FILES['file']['size']; ?> </P>
-				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $crypt ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
 		</div>
 	</div>
