@@ -26,7 +26,7 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<form method="POST" enctype="multipart/form-data" action="upload.php">
+			<form method="POST" enctype="multipart/form-data" action="upload.php"> <!-- paspaudus upload nukreips i upload.php puslapi -->
 				<input type="file" name="file">
 				<button type="submit">Upload file</button>
 			</form>
