@@ -34,6 +34,7 @@ print_r($result);
 			<div class="col-md-12">
 				<h2>Jau gali parsisiųsti savo dokumentą: <?= $result->original_file_name; ?></h2>
 				<P>Dokumento dydis: <?= $result->file_size; ?> </P>
+				<p>Dokumentas buvo įkeltas: <?= $result->upload_time; ?> </p>
 				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>files/<?= $result->encoded_file_name ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
 		</div>
