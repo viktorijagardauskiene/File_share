@@ -44,7 +44,7 @@ $db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size)
 				<h2>Tavo dokumentas buvo įkeltas</h2>
 				<P>Dokumento pavadinimas: <?= $_FILES['file']['name']; ?> </P>
 				<P>Dokumento dydis: <?= $_FILES['file']['size']; ?> </P>
-				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>"> Spausk ir parsisiųsk </a> </P>
+				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
 		</div>
 	</div>
