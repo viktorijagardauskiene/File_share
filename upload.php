@@ -6,7 +6,7 @@ print_r($_FILES);
 $file_name = explode(".", $_FILES["file"]['name']); // iskaido fialo pavadinima i pavadinima ir pletini
 
 $encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom i skliaustelius, siuo atveju failo pavadinima be pletinio
-$target_file = $encoded_file_name . "." .$file_name[1];
+$target_file = "files/" . $encoded_file_name . "." .$file_name[1];
 
 move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
