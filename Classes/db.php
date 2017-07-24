@@ -1,9 +1,9 @@
 <?php
 class DB {
 	private $db_hostname = 'localhost';
-	private $db_username = 'ViktorijaG';
-	private $db_password = 'kashtankai15';
-	private $db = 'viktorijag';
+	private $db_username = 'root';
+	private $db_password = '';
+	private $db = 'exchange';
 	private $conn;
 
 	//prisijungiam prie db

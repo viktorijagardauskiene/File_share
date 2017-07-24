@@ -1,6 +1,8 @@
 <pre>
 <?php
 
+include 'classes/db.php';
+
 print_r($_FILES);
 
 $file_name = explode(".", $_FILES["file"]['name']); // iskaido fialo pavadinima i pavadinima ir pletini
@@ -9,6 +11,9 @@ $encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom
 $target_file = "files/" . $encoded_file_name . "." .$file_name[1];
 
 move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+$db = new DB();
+$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name."', '".$_FILES["file"]["size"]."')");
 
 ?>
 </pre>
