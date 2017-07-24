@@ -1,6 +1,14 @@
 <?php
 
+/* namu darbai: 
+1. mail send funkcija
+2. max file size (check) 10 mb if funkcija $_FILE['file']['size']
+3. alerts kad netinka failas..del dydzio, tipo ar pan
+4. file type check (nereikia exe, zip, avi ir pan); susidarom masyva ir patikrinam ar yra toks masyve, jei yra tada neleidziam
+5. downloads.php jeigu tai yra paveiksliukas jpg, png ar gif parodyti maza ikonele kad tai yra paveiksliukas, o jeigu mps sugeneruojam grotuva
 
+
+*/
 
 
 ?>
