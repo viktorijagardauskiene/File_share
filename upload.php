@@ -27,7 +27,7 @@ $files->uploadFile($_FILES["file"]);
 	</div>
 	<div class="jumbotron jumbotron-fluid">
 	  <div class="container">
-	    <h1 class="display-3">Dokumentų pasikeitimo serveris</h1>
+	    <h1 class="display-3"><a href="//localhost/viktorijag/file_share" style="text-decoration: none; color: black">Dokumentų pasikeitimo serveris</a></h1>
 	    <p class="lead">Štai nuoroda</p>
 	  </div>
 	</div>

@@ -28,17 +28,25 @@ $files->downloadFile($_GET['crypt']);
 	</div>
 	<div class="jumbotron jumbotron-fluid">
 	  <div class="container">
-	    <h1 class="display-3">Dokumentų pasikeitimo serveris</h1>
+	    <h1 class="display-3"><a href="//localhost/viktorijag/file_share" style="text-decoration: none; color: black">Dokumentų pasikeitimo serveris</a></h1>
 	    <p class="lead">Štai nuoroda - spausk ir parsisiųsk</p>
 	  </div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Jau gali parsisiųsti savo dokumentą: <?= $files->file_name; ?></h2>
-				<P>Dokumento dydis: <?= $files->file_size; ?> </P>
-				<p>Dokumentas buvo įkeltas: <?= $files->upload_time; ?> </p>
-				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>files/<?= $files->encoded_file_name ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+				<?php 
+					if (isset($files->error)) {
+						echo '<h1>'.$files->error.'</h1>';
+					} else {
+						echo '<h2>Jau gali parsisiųsti savo dokumentą: '.$files->file_name.'</h2>
+				<P>Dokumento dydis: '.$files->file_size.'</P>
+				<p>Dokumentas buvo įkeltas: '.$files->upload_time.'</p>
+				<P>Dokumento nuoroda: <a download href="'.SITEURL.'files/'.$files->encoded_file_name.'"> Spausk ir parsisiųsk </a> </P>'; // <!-- SITEURL yra sukurtas virsuje su define funkcija-->';
+					}
+				?>
+
+				
 			</div>
 		</div>
 	</div>

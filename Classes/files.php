@@ -56,21 +56,33 @@ class Files {
 			$this->file_size = $this->convertBytes($file['size']);
 
 
-			$file_name = explode(".", $file['name']); // iskaido fialo pavadinima i pavadinima ir pletini
+			$file_name = explode(".", $file['name']); // iskaido fialo pavadinima i pavadinima ir pletini, reiktu naudoti paskutini elementa jei pavadinime butu daugiau nei vienas taskas
 
-			$encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom i skliaustelius, siuo atveju failo pavadinima be pletinio
-			$target_file = "files/" . $encoded_file_name . "." .$file_name[1];
+			if($file_name[1] == "exe") {
 
-			move_uploaded_file($file["tmp_name"], $target_file);
+				$this->error = "Netinkamo formato dokumentas";
 
-			$this->crypt = md5($file_name[0] . rand(1,100000));
+			} elseif($file['size'] > 1024*1024*5) { // 5 mb // reik pakeist nustatymus wamp
+
+				$this->error = "Dokumentas yra per didelis";
+
+			} else {
+				$encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom i skliaustelius, siuo atveju failo pavadinima be pletinio
+				$target_file = "files/" . $encoded_file_name . "." .$file_name[1];
+
+				move_uploaded_file($file["tmp_name"], $target_file);
+
+				$this->crypt = md5($file_name[0] . rand(1,100000));
 
 
-			$query = "INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$file["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$file["size"]."', '".$this->crypt."')";
+				$query = "INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$file["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$file["size"]."', '".$this->crypt."')";
+				
+				DB::store($query);
+			}
+
 			
-			DB::store($query);
 		} else {
-			
+
 			$this->error = "There was an error";
 		}
 	}
@@ -78,10 +90,14 @@ class Files {
 	public function downloadFile($crypt) {
 		$result = DB::query("SELECT * FROM files where crypt = '$crypt'")[0];
 
+		if (sizeof($result)) { // sitas neaisku is kur
 		$this->file_name = $result->original_file_name;
 		$this->file_size = $result->file_size;
 		$this->upload_time = $result->upload_time;
 		$this->encoded_file_name = $result->encoded_file_name;
+	} else {
+		$this->error = "Dokumentas neegzistuoja arba yra sugadintas";
+	}
 
 	}
 }
