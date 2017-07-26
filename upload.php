@@ -34,10 +34,15 @@ $files->uploadFile($_FILES["file"]);
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Tavo dokumentas buvo įkeltas</h2>
-				<P>Dokumento pavadinimas: <?= $files->file_name; ?> </P>
-				<P>Dokumento dydis: <?= $files->file_size; ?> </P>
-				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $files->crypt ?>"> Spausk ir keliauk i download </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+					<?php  if(isset($files->error)) {
+						echo '<h1>'.$files->error.'</h1>';
+						} else {
+							echo '<h2>Tavo dokumentas buvo įkeltas</h2>
+				<P>Dokumento pavadinimas: '.$files->file_name.'</P>
+				<P>Dokumento dydis: '.$files->file_size.'</P>
+				<P>Dokumento nuoroda: <a href="'.SITEURL.'/download.php?crypt='.$files->crypt.'"> Spausk ir keliauk i download </a> </P>'; // <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+							} ?>
+				
 			</div>
 		</div>
 	</div>
