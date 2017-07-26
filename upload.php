@@ -37,7 +37,7 @@ $files->uploadFile($_FILES["file"]);
 				<h2>Tavo dokumentas buvo įkeltas</h2>
 				<P>Dokumento pavadinimas: <?= $files->file_name; ?> </P>
 				<P>Dokumento dydis: <?= $files->file_size; ?> </P>
-				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $files->crypt ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $files->crypt ?>"> Spausk ir keliauk i download </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
 		</div>
 	</div>

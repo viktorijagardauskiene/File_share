@@ -47,6 +47,11 @@ class Files {
 	}
 
 	public function uploadFile($file) {
+
+		$this->file_name = $file['name'];
+		$this->file_size = $this->convertBytes($file['size']);
+
+
 		$file_name = explode(".", $file['name']); // iskaido fialo pavadinima i pavadinima ir pletini
 
 		$encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom i skliaustelius, siuo atveju failo pavadinima be pletinio
@@ -54,10 +59,11 @@ class Files {
 
 		move_uploaded_file($file["tmp_name"], $target_file);
 
-		$crypt = md5($file_name[0] . rand(1,100000));
+		$this->crypt = md5($file_name[0] . rand(1,100000));
 
-//		$db = new DB();
-		//$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$file["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$file["size"]."', '".$crypt."')");
-		//DB::store($query);
+
+		$query = "INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$file["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$file["size"]."', '".$this->crypt."')";
+		
+		DB::store($query);
 	}
 }
