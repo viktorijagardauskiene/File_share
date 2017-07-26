@@ -9,7 +9,9 @@
 
 
 */
+include 'classes/files.php';
 
+$files = new Files();
 
 ?>
 
@@ -40,6 +42,20 @@
 			</form>
 
 		</div>
+	</div>
+	<div class = "container">
+	<div class="row">
+	<div class ="col-md-4">
+		<h1><?= $files->total_size;  ?></h1>
+	</div>
+	<div class ="col-md-4">
+		<h1><?= $files->total_files;  ?></h1>
+	</div>
+	<div class ="col-md-4">
+		<h1><?= $files->last_upload;  ?></h1>
+	</div>
+		
+	</div>
 	</div>
 </body>
 </html>
