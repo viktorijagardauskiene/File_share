@@ -10,6 +10,7 @@
 
 */
 include 'classes/files.php';
+include 'classes/db.php'; 
 
 $files = new Files();
 
@@ -28,12 +29,7 @@ $files = new Files();
 			
 		</div>
 	</div>
-	<div class="jumbotron jumbotron-fluid">
-	  <div class="container">
-	    <h1 class="display-3">Dokumentų pasikeitimo serveris</h1>
-	    <p class="lead">Čia gali įkelti dokumentą</p>
-	  </div>
-	</div>
+	<?= include 'inc/header.php'; ?>
 	<div class="container">
 		<div class="row">
 			<form method="POST" enctype="multipart/form-data" action="upload.php"> <!-- paspaudus upload nukreips i upload.php puslapi -->
@@ -43,19 +39,6 @@ $files = new Files();
 
 		</div>
 	</div>
-	<div class = "container" style="padding: 30px">
-		<div class="row">
-			<div class ="col-md-4">
-				<h1><?= $files->total_size;  ?></h1>
-			</div>
-			<div class ="col-md-4">
-				<h1><?= $files->total_files;  ?></h1>
-			</div>
-			<div class ="col-md-4">
-				<h1><?= $files->last_upload;  ?></h1>
-			</div>
-		
-		</div>
-	</div>
+	<?= include 'inc/cards.php'; ?>
 </body>
 </html>
