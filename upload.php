@@ -1,22 +1,13 @@
-<pre>
 <?php
 
+
 include 'classes/db.php';
+include 'classes/files.php';
 define("SITEURL", "//localhost/viktorijag/file_share/");
 
-print_r($_FILES);
+$files = new Files();
+$files->uploadFile($_FILES["file"]);
 
-$file_name = explode(".", $_FILES["file"]['name']); // iskaido fialo pavadinima i pavadinima ir pletini
-
-$encoded_file_name = MD5($file_name[0]); // MD5 funkcija uzkoduoja tai ka irasom i skliaustelius, siuo atveju failo pavadinima be pletinio
-$target_file = "files/" . $encoded_file_name . "." .$file_name[1];
-
-move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-
-$crypt = md5($file_name[0] . rand(1,100000));
-
-$db = new DB();
-$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$_FILES["file"]["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$_FILES["file"]["size"]."', '".$crypt."')");
 
 ?>
 </pre>
@@ -44,10 +35,24 @@ $db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size,
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Tavo dokumentas buvo įkeltas</h2>
-				<P>Dokumento pavadinimas: <?= $_FILES['file']['name']; ?> </P>
-				<P>Dokumento dydis: <?= $_FILES['file']['size']; ?> </P>
-				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $crypt ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+				<P>Dokumento pavadinimas: <?= $files->file_name; ?> </P>
+				<P>Dokumento dydis: <?= $files->file_size; ?> </P>
+				<P>Dokumento nuoroda: <a href="<?= SITEURL; ?>/download.php?crypt=<?= $files->crypt ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
+		</div>
+	</div>
+	<div class = "container" style="padding: 30px">
+		<div class="row">
+			<div class ="col-md-4">
+				<h1><?= $files->total_size;  ?></h1>
+			</div>
+			<div class ="col-md-4">
+				<h1><?= $files->total_files;  ?></h1>
+			</div>
+			<div class ="col-md-4">
+				<h1><?= $files->last_upload;  ?></h1>
+			</div>
+		
 		</div>
 	</div>
 </body>
