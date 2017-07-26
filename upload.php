@@ -10,7 +10,7 @@ $files->uploadFile($_FILES["file"]);
 
 
 ?>
-</pre>
+
 
 <!DOCTYPE html>
 <html>

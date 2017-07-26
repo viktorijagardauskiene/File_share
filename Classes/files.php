@@ -9,6 +9,8 @@ class Files {
 	public $file_name;
 	public $file_size;
 	public $crypt;
+	public $upload_time;
+	public $encoded_file_name;
 
 	function __construct() {
 		
@@ -65,5 +67,15 @@ class Files {
 		$query = "INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('".$file["name"]."', '".$encoded_file_name.".".$file_name[1]."', '".$file["size"]."', '".$this->crypt."')";
 		
 		DB::store($query);
+	}
+
+	public function downloadFile($crypt) {
+		$result = DB::query("SELECT * FROM files where crypt = '$crypt'")[0];
+
+		$this->file_name = $result->original_file_name;
+		$this->file_size = $result->file_size;
+		$this->upload_time = $result->upload_time;
+		$this->encoded_file_name = $result->encoded_file_name;
+
 	}
 }

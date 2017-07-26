@@ -1,14 +1,17 @@
-<pre>
 <?php
 include "classes/db.php";
+include "classes/files.php";
+
+$files = new Files();
+
 define("SITEURL", "//localhost/viktorijag/file_share/");
 
-$result = DB::query("SELECT * FROM files WHERE crypt = '". $_GET['crypt']. "' ")[0];
-print_r($result);
+// $result = DB::query("SELECT * FROM files WHERE crypt = '". $_GET['crypt']. "' ")[0];
 
+$files->downloadFile($_GET['crypt']);
 
 ?>
-</pre>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,11 +35,25 @@ print_r($result);
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Jau gali parsisiųsti savo dokumentą: <?= $result->original_file_name; ?></h2>
-				<P>Dokumento dydis: <?= $result->file_size; ?> </P>
-				<p>Dokumentas buvo įkeltas: <?= $result->upload_time; ?> </p>
-				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>files/<?= $result->encoded_file_name ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
+				<h2>Jau gali parsisiųsti savo dokumentą: <?= $files->file_name; ?></h2>
+				<P>Dokumento dydis: <?= $files->file_size; ?> </P>
+				<p>Dokumentas buvo įkeltas: <?= $files->upload_time; ?> </p>
+				<P>Dokumento nuoroda: <a download href="<?= SITEURL; ?>files/<?= $files->encoded_file_name ?>"> Spausk ir parsisiųsk </a> </P> <!-- SITEURL yra sukurtas virsuje su define funkcija-->
 			</div>
+		</div>
+	</div>
+	<div class = "container" style="padding: 30px">
+		<div class="row">
+			<div class ="col-md-4">
+				<h1><?= $files->total_size;  ?></h1>
+			</div>
+			<div class ="col-md-4">
+				<h1><?= $files->total_files;  ?></h1>
+			</div>
+			<div class ="col-md-4">
+				<h1><?= $files->last_upload;  ?></h1>
+			</div>
+		
 		</div>
 	</div>
 </body>
